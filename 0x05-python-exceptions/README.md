@@ -72,3 +72,75 @@ print: out of range
 	- You have to use try: / except: / finally:
 	- You are not allowed to import any module
 
+### Task 5 - Raise exception
+* Write a function that raises a type exception.
+	- Prototype: def raise_exception():
+	- You are not allowed to import any module
+
+### Task 6 - Raise a message
+* Write a function that raises a name exception with a message.
+	- Prototype: def raise_exception_msg(message=""):
+	- You are not allowed to import any module
+
+### Task 7 - Safe integer print with error message
+* Write a function that prints an integer.
+	- Prototype: def safe_print_integer_err(value):
+	- value can be any type (integer, string, etc.)
+	- The integer should be printed followed by a new line
+	- Returns True if value has been correctly printed (it means the value is an integer)
+	- Otherwise, returns False and prints in stderr the error precede by Exception:
+	- You have to use try: / except:
+	- You have to use "{:d}".format() to print as integer
+	- You are not allowed to use type()
+
+### Task 8 - Safe function
+* Write a function that executes a function safely.
+	- Prototype: def safe_function(fct, *args):
+	- You can assume fct will be always a pointer to a function
+	- Returns the result of the function,
+	- Otherwise, returns None if something happens during the function and prints in stderr the error precede by Exception:
+	- You have to use try: / except:
+
+### Task 9 - ByteCode -> Python #4
+* Write the Python function def magic_calculation(a, b): that does exactly the same as the following Python bytecode:
+	- Tip: Python bytecode
+
+### Task 10 - CPython #2: PyFloatObject
+* Create three C functions that print some basic info about Python lists, Python bytes an Python float objects.
+	* Python lists:
+		- Prototype: void print_python_list(PyObject *p);
+		- Format: see example
+		- If p is not a valid PyListObject, print an error message (see example)
+	* Python bytes:
+		- Prototype: void print_python_bytes(PyObject *p);
+		- Format: see example
+		- Line “first X bytes”: print a maximum of 10 bytes
+		- If p is not a valid PyBytesObject, print an error message (see example)
+	* Python float:
+		- Prototype: void print_python_float(PyObject *p);
+		- Format: see example
+		- If p is not a valid PyFloatObject, print an error message (see example)
+		- Read /usr/include/python3.4/floatobject.h
+	* About:
+		- Python version: 3.4
+		- You are allowed to use the C standard library
+		- Your shared library will be compiled with this command line: gcc -Wall -Werror -Wextra -pedantic -std=c99 -shared -Wl,-soname,libPython.so -o libPython.so -fPIC -I/usr/include/python3.4 103-python.c
+		- You are not allowed to use the following macros/functions:
+			- Py_SIZE
+			- Py_TYPE
+			- PyList_Size
+			- PyList_GetItem
+			- PyBytes_AS_STRING
+			- PyBytes_GET_SIZE
+			- PyBytes_AsString
+			- PyBytes_AsStringAndSize
+			- PyFloat_AS_DOUBLE
+			- PySequence_GetItem
+			- PySequence_Fast_GET_SIZE
+			- PySequence_Fast_GET_ITEM
+			- PySequence_ITEM
+			- PySequence_Fast_ITEMS
+
+	* NOTE:
+		- The python script will be launched using the -u option (Force stdout to be unbuffered).
+		- It is strongly advised to either use setbuf(stdout, NULL); or fflush(stdout) in your C functions IF you choose to use printf. The reason to that is that Pythonsprintand libCs printf don’t share the same buffer, and the output can appear disordered.
