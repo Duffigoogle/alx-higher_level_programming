@@ -14,9 +14,14 @@ class Square:
         """Args:
         self: object instance.
         size (integer): size of the square passed. Default size is 0.
+
+        Raises:
+            TypeError: size must be an integer
+            ValueError: size must be >= 0
         """
-        if not isinstance(size, int):
+        if type(size) != int:
             raise TypeError("Size must be an integer")
-        elif size < 0:
+
+        if size < 0:
             raise ValueError("Size must be >= 0")
         self.__size = size
