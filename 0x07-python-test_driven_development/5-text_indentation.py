@@ -1,24 +1,26 @@
 #!/usr/bin/python3
-""" Text indentation """
+"""4. Text indentation"""
 
 
 def text_indentation(text):
     """
-        prints a text with 2 new lines after
-        each of these characters: ., ? and :
-        Parameters:
-            text: must be a string
-        Raise:
-            TypeError: If text is not string
-        """
+    Prints a text with 2 new lines after each of
+    these characters: ., ? and :
+    Parameters:
+        text: must be a string
+    Raises:
+        TypeError: If text is not string
+    """
     if type(text) is not str:
         raise TypeError("text must be a string")
-    i = 0
-    while i < len(text):
-        if text[i] in [':', '.', '?']:
-            print(text[i])
-            print()
-            i += 1
+
+    is_omitting_spaces = False
+    for c in text:
+        if is_omitting_spaces and c is " ":
+            continue
+        if c in [".", "?", ":"]:
+            print("{}\n".format(c))
+            is_omitting_spaces = True
         else:
-            print(text[i], end='')
-        i += 1
+            print(c, end="")
+            is_omitting_spaces = False
