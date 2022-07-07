@@ -1,0 +1,49 @@
+Using ``2-matrix_divided.py``
+python3 -m doctest -v ./tests/2-matrix_divided.txt | tail -2
+
+
+    >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+
+    >>> matrix_divided([[1, 2], [1, 2]], 3)
+    [[0.33, 0.67], [0.33, 0.67]]
+
+
+    >>> matrix_divided([[1.0, 2.0], [1.0, 2.0]], 3)
+    [[0.33, 0.67], [0.33, 0.67]]
+
+
+    >>> matrix_divided([[1, "abc"], [1, 2]], 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+
+    >>> matrix_divided([[1, 2], [1, "abc"]], 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+
+    >>> matrix_divided([[1, 2], "abc"], 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: matrix must be a matrix(list of lists) of integers/floats
+
+
+    >>> matrix_divided([[1], [1, 2]], 3)
+    Traceback (most recent call last):
+        ...
+    TypeError: Each row of the matrix must have the same size
+
+
+    >>> matrix_divided([[1, 2], [1, 2]], "abc")
+    Traceback (most recent call last):
+        ...
+    TypeError: div must be a number
+
+
+    >>> matrix_divided([[1, 2], [1, 2]], 0)
+    Traceback (most recent call last):
+        ...
+    ZeroDivisionError: division by zero
