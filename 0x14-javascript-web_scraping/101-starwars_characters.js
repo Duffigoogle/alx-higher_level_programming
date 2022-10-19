@@ -7,26 +7,39 @@
 // ./101-starwars_characters.js 3
 
 const request = require('request');
+const id = process.argv[2];
+const url = 'https://swapi-api.hbtn.io/api/films/' + id;
 
-function helpRequest (arr, i) {
-  if (i === arr.length) {
-    return;
-  }
-  request(arr[i], function (error, response, body) {
-    if (error) {
-      console.error(error);
-    }
-    console.log(JSON.parse(body).name);
-    helpRequest(arr, i + 1);
+// wrap a request in an promise
+function getCharacter (uri) {
+  return new Promise((resolve, reject) => {
+    request(uri, (error, response, body) => {
+      if (error) reject(error);
+      resolve(body);
+    });
   });
 }
 
-request('http://swapi.co/api/films/' + process.argv[2], function (error, response, body) {
-  if (error) {
+// now to program the "usual" way
+// all you need to do is use async functions and await
+// for functions returning promises
+async function myBackEndLogic (listUri) {
+  try {
+    for (const uri of listUri) {
+      const data = await getCharacter(uri);
+      console.log(JSON.parse(data).name);
+    }
+  } catch (error) {
+    console.error('ERROR:');
     console.error(error);
   }
-  const charac = JSON.parse(body).characters;
-  helpRequest(charac, 0);
+}
+
+// get list of characters url
+request(url, function (error, response, body) {
+  if (!error && response.statusCode === 200) {
+    const characters = JSON.parse(body).characters;
+    // console.log(charactersList)
+    myBackEndLogic(characters);
+  }
 });
-
-
